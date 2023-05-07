@@ -1,0 +1,23 @@
+notARepository: 'quit'
+gui:
+  showIcons: false
+  theme:
+    inactiveBorderColor:
+      - '#949494'
+    activeBorderColor:
+      - '#AF5FAF'
+      - bold
+    selectedLineBgColor:
+      - '#262626'
+    defaultFgColor:
+      - '#DADADA'
+    unstagedChangesColor:
+      - '#D75FAF'
+    stagedChangesColor:
+      - '#5FAF5F'
+    optionsTextColor:
+      - '#FFFF00'
+git:
+  paging:
+    colarArg: never
+    pager: delta --dark --paging=never
