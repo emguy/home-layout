@@ -13,6 +13,11 @@ if [[ $- != *i* ]] ; then
   return
 fi
 
+# set LS_COLORS
+if [ -f "$HOME/.dir_colors" ]; then
+  eval "$(gdircolors -b $HOME/.dir_colors)"
+fi
+
 bindkey ^v forward-word
 bindkey ^y backward-word
 bindkey ^u backward-kill-line
@@ -54,6 +59,9 @@ export MANPATH="$HOME/.local/share/man:$MANPATH"
 export KUBE_EDITOR="nvim"
 export DOCKER_CONFIG="$HOME/.docker"
 
+export MANPAGER="/usr/bin/less -R --use-color -Ddc -Du+y"
+
+
 ## use gnu binaries
 BREW_PREFIX="$(brew --prefix)"
 alias ls='$BREW_PREFIX/bin/gls --color'
@@ -79,6 +87,7 @@ alias g++="g++ -std=c++11 -march=native -pipe -O2"
 
 alias vim="nvim"
 alias vi="nvim"
+alias nvimrc="nvim $XDG_CONFIG_HOME/nvim/init.lua"
 alias argbash="docker run -v \$(pwd):/work --rm argbash"
 alias argbash-init="docker run -v \$(pwd):/work --rm -e PROGRAM=argbash-init argbash"
 
@@ -97,7 +106,6 @@ fi
 if [ -d "$HOME/conTeXt" ]; then
   export PATH=/home/emguy/conTeXt/tex/texmf-linux-64/bin:$PATH
 fi
-
 
 #source  $HOME/venv/bin/activate
 
