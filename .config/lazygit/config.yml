@@ -17,7 +17,7 @@ gui:
       - '#5FAF5F'
     optionsTextColor:
       - '#FFFF00'
-git:
-  paging:
-    colarArg: never
-    pager: delta --dark --paging=never
+#git:
+#  paging:
+#    colarArg: never
+#    pager: delta --dark --paging=never

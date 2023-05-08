@@ -98,6 +98,7 @@ if [ -d "$HOME/conTeXt" ]; then
   export PATH=/home/emguy/conTeXt/tex/texmf-linux-64/bin:$PATH
 fi
 
+
 #source  $HOME/venv/bin/activate
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
