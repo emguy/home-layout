@@ -1,3 +1,16 @@
+if [ -f '/etc/zshrc' ]; then
+  source /etc/zshrc
+fi
+
+if [ -f '/etc/zshrc_Apple_Terminal' ]; then
+  source /etc/zshrc_Apple_Terminal
+fi
+
+# Shell is non-interactive.  Be done now!
+if [[ $- != *i* ]] ; then
+  return
+fi
+
 if [ -f ~/.zshrc ] ; then
 	source ~/.zshrc
 fi

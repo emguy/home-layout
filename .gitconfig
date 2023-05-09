@@ -1,0 +1,55 @@
+[include]
+  path = ~/.gitconfig-user
+[core]
+	editor = nvim
+  pager = delta
+[papger]
+	branch = false
+[color]
+	ui = true
+[pull]
+	rebase = false
+[diff]
+  tool = difftastic
+[difftool]
+  prompt = false
+[difftool "difftastic"]
+  cmd = "difft --syntax-highlight off \"$LOCAL\" \"$REMOTE\""
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[interactive]
+  diffFilter = delta --color-only
+[merge]
+  conflictstyle = diff3
+[delta]
+  navigate = true
+  light = false
+  side-by-side = true
+  line-numbers = true
+  feature = decorations
+  commit-decoration-style = none
+  diff-so-fancy = true
+  dark = true
+  file-style = "#AFFF00" bold
+  file-decoration-style = "#D787AF" box
+  hunk-header-style = line-number syntax
+  hunk-header-decoration-style = none
+  hunk-header-file-style = "#AFFF00"
+  hunk-header-line-number-style = bold "#AFFF00"
+  line-numbers-left-style  = "#D787AF"
+  line-numbers-right-style = "#D787AF"
+
+  line-numbers-minus-style = "#875F5F" bold
+  line-numbers-plus-style = "#5F875F" bold
+  line-numbers-zero-style = "#AAAAAA"
+
+  #whitespace-error-style = "#280050"
+
+  minus-style = normal "#875F5F"
+  minus-emph-style = normal "#5F0000"
+
+  plus-style = normal "#5F875F"
+  plus-emph-style = normal "#005F00"
+  #syntax-theme = Nord
+[delta "interactive"]
+  keep-plus-minus-markers = false

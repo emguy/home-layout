@@ -53,7 +53,7 @@ EIGHTBIT 1
 #NORMAL 00	# global default, no color code at all
 #FILE 00	# normal file, use no color at all
 RESET 0 # reset to "normal" color
-DIR 01;38;5;27	# directory
+DIR 01;38;5;69	# directory
 LINK 00;38;5;51	# symbolic link (If you set this to 'target' instead of a
 		# numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 44;38;5;15 # regular file with more than one link

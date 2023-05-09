@@ -1,18 +1,4 @@
 #!/usr/bin/env zsh
-
-if [ -f '/etc/zshrc' ]; then
-  source /etc/zshrc
-fi
-
-if [ -f '/etc/zshrc_Apple_Terminal' ]; then
-  source /etc/zshrc_Apple_Terminal
-fi
-
-# Shell is non-interactive.  Be done now!
-if [[ $- != *i* ]] ; then
-  return
-fi
-
 # set LS_COLORS
 if [ -f "$HOME/.dir_colors" ]; then
   eval "$(gdircolors -b $HOME/.dir_colors)"
