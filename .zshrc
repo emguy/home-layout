@@ -52,12 +52,14 @@ export MANPAGER="/usr/bin/less -R --use-color -Ddc -Du+y"
 BREW_PREFIX="$(brew --prefix)"
 alias ls='$BREW_PREFIX/bin/gls --color'
 alias cp='$BREW_PREFIX/bin/gcp'
+alias cdr='cd "$(git rev-parse --show-toplevel)"'
 alias rm='$BREW_PREFIX/bin/grm'
 alias sed='$BREW_PREFIX/bin/gsed'
 alias find='$BREW_PREFIX/bin/gfind'
 alias awk='$BREW_PREFIX/bin/gawk'
 alias tar='$BREW_PREFIX/bin/gtar'
 alias grep='$BREW_PREFIX/bin/ggrep --color'
+alias G="lazygit"
 
 alias df="df -h"
 alias du="du -h"
@@ -73,6 +75,7 @@ alias g++="g++ -std=c++11 -march=native -pipe -O2"
 
 alias vim="nvim"
 alias vi="nvim"
+alias rg="rg --no-ignore --no-ignore-dot"
 alias nvimrc="nvim $XDG_CONFIG_HOME/nvim/init.lua"
 alias argbash="docker run -v \$(pwd):/work --rm argbash"
 alias argbash-init="docker run -v \$(pwd):/work --rm -e PROGRAM=argbash-init argbash"
@@ -98,3 +101,5 @@ fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+

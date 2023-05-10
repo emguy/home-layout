@@ -20,36 +20,38 @@
 [interactive]
   diffFilter = delta --color-only
 [merge]
+  tool = nvimdiff
   conflictstyle = diff3
+[mergetool]
+  keepBackup = false
+  trustExitCode = false
+  prompt = true
+[mergetool "nvimdiff"]
+  layout = LOCAL,MERGED,REMOTE
 [delta]
   navigate = true
-  light = false
+  dark = true
   side-by-side = true
   line-numbers = true
   feature = decorations
-  commit-decoration-style = none
-  diff-so-fancy = true
-  dark = true
+  commit-decoration-style = "#D787AF" box
   file-style = "#AFFF00" bold
-  file-decoration-style = "#D787AF" box
+  file-decoration-style = "#D787AF"
   hunk-header-style = line-number syntax
   hunk-header-decoration-style = none
   hunk-header-file-style = "#AFFF00"
   hunk-header-line-number-style = bold "#AFFF00"
   line-numbers-left-style  = "#D787AF"
   line-numbers-right-style = "#D787AF"
-
   line-numbers-minus-style = "#875F5F" bold
   line-numbers-plus-style = "#5F875F" bold
   line-numbers-zero-style = "#AAAAAA"
-
-  #whitespace-error-style = "#280050"
-
+  whitespace-error-style = "#280050"
   minus-style = normal "#875F5F"
   minus-emph-style = normal "#5F0000"
-
   plus-style = normal "#5F875F"
   plus-emph-style = normal "#005F00"
-  #syntax-theme = Nord
+  blame-palette = "238 236 235 233"
+
 [delta "interactive"]
   keep-plus-minus-markers = false
