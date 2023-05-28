@@ -60,6 +60,7 @@ alias awk='$BREW_PREFIX/bin/gawk'
 alias tar='$BREW_PREFIX/bin/gtar'
 alias grep='$BREW_PREFIX/bin/ggrep --color'
 alias G="lazygit"
+alias kk="kubectl"
 
 alias df="df -h"
 alias du="du -h"
