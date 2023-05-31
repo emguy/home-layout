@@ -1,0 +1,13 @@
+*
+
+!.gitignore
+!.zshrc
+!.zsh_profile
+!.vimrc
+!.tmux.conf
+!.dir_colors
+!.gitconfig
+!.config
+!.config/lazygit
+!.config/lazygit/config.yml
+!.shell_utils.sh

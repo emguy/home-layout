@@ -91,6 +91,11 @@ if [ -f "$HOME/.bellshell.sh" ]; then
   source "$HOME/.bellshell.sh"
 fi
 
+if [ -f "$HOME/.shell_utils.sh" ]; then
+  # shellcheck source=./.shell_utils.sh
+  source "$HOME/.shell_utils.sh"
+fi
+
 #[ -z "$TMUX" ] && { tmux attach &> /dev/null || exec tmux new-session -s main && exit;}
 
 if [ -d "$HOME/conTeXt" ]; then
@@ -102,5 +107,3 @@ fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
-
