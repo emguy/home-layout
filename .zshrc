@@ -1,4 +1,19 @@
 #!/usr/bin/env zsh
+if [ -f '/etc/zshrc' ]; then
+  source /etc/zshrc
+fi
+
+export PATH="/opt/homebrew/bin:$PATH:$HOME/go/bin"
+
+#if [ -f '/etc/zshrc_Apple_Terminal' ]; then
+#  source /etc/zshrc_Apple_Terminal
+#fi
+
+# Shell is non-interactive.  Be done now!
+if [[ $- != *i* ]] ; then
+  return
+fi
+
 # set LS_COLORS
 if [ -f "$HOME/.dir_colors" ]; then
   eval "$(gdircolors -b $HOME/.dir_colors)"
@@ -16,13 +31,12 @@ setopt PROMPT_SUBST
 PROMPT='%F{226}%n@zsh%f %F{69}%~%f %F{112}${vcs_info_msg_0_}%f%F{69}$%f '
 
 # zsh history configurations
-setopt HIST_FIND_NO_DUPS # skip duplicated commmand
-setopt HIST_IGNORE_DUPS
-export HISTFILE="~/.zsh_history"
-export HISTSIZE=5000000 # HISTSIZE is the number of cached commands
-export HISTFILESIZE=5000000 # how many commands can be stored in the . bash_history file
-#setopt EXTENDED_HISTORY # records the timestamp in HISTFILE
-#export HISTTIMEFORMAT="[%F %T]"
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
+export HISTSIZE=200000
+export SAVEHIST=200000
+export HISTFILE="$HOME/.zsh_history"
 
 # auto-completion
 autoload -Uz compinit && compinit
@@ -39,7 +53,6 @@ export XDG_CONFIG_HOME="$HOME/.config" # lazygit
 
 export NPM_PACKAGES="$HOME/.npm-global"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-export PATH="$HOME/.local/share/nvim/mason/bin:$HOME/.local/bin:/opt/homebrew/bin:$HOME/.local/ConTeXt/tex/texmf-linux-64/bin:/opt/node/bin:$NPM_PACKAGES/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
 
 export KUBE_EDITOR="nvim"
@@ -47,20 +60,22 @@ export DOCKER_CONFIG="$HOME/.docker"
 
 export MANPAGER="/usr/bin/less -R --use-color -Ddc -Du+y"
 
+#export REGISTRY_AUTH_FILE="$HOME/.config/containers/auth.json"
 
 ## use gnu binaries
-BREW_PREFIX="$(brew --prefix)"
-alias ls='$BREW_PREFIX/bin/gls --color'
-alias cp='$BREW_PREFIX/bin/gcp'
+export HOMEBREW_PREFIX="$(brew --prefix)"
+alias ls='$HOMEBREW_PREFIX/bin/gls --color'
+alias cp='$HOMEBREW_PREFIX/bin/gcp'
 alias cdr='cd "$(git rev-parse --show-toplevel)"'
-alias rm='$BREW_PREFIX/bin/grm'
-alias sed='$BREW_PREFIX/bin/gsed'
-alias find='$BREW_PREFIX/bin/gfind'
-alias awk='$BREW_PREFIX/bin/gawk'
-alias tar='$BREW_PREFIX/bin/gtar'
-alias grep='$BREW_PREFIX/bin/ggrep --color'
+alias rm='$HOMEBREW_PREFIX/bin/grm'
+alias sed='$HOMEBREW_PREFIX/bin/gsed'
+alias find='$HOMEBREW_PREFIX/bin/gfind'
+alias awk='$HOMEBREW_PREFIX/bin/gawk'
+alias tar='$HOMEBREW_PREFIX/bin/gtar'
+alias grep='$HOMEBREW_PREFIX/bin/ggrep --color'
 alias G="lazygit"
-alias kk="kubectl"
+
+alias vm="ssh emguy@vm.local"
 
 alias df="df -h"
 alias du="du -h"
@@ -87,8 +102,13 @@ if [ -x "$(command -v kubectl)" ]; then
 fi
 
 if [ -f "$HOME/.bellshell.sh" ]; then
-  # shellcheck source=./.babellshell.sh
+  # shellcheck source=./.bellshell.sh
   source "$HOME/.bellshell.sh"
+fi
+
+if [ -f "$HOME/.awsshell.sh" ]; then
+  # shellcheck source=./.awsshell.sh
+  source "$HOME/.awsshell.sh"
 fi
 
 if [ -f "$HOME/.shell_utils.sh" ]; then
@@ -107,3 +127,5 @@ fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+export PATH="$JAVA_HOME/bin:$HOMEBREW_PREFIX/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.local/bin:/opt/homebrew/bin:$HOME/.local/ConTeXt/tex/texmf-linux-64/bin:/opt/node/bin:$NPM_PACKAGES/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH"
