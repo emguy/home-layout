@@ -1,4 +1,17 @@
 #!/usr/bin/env zsh
+if [ -f '/etc/zshrc' ]; then
+  source /etc/zshrc
+fi
+
+if [ -f '/etc/zshrc_Apple_Terminal' ]; then
+  source /etc/zshrc_Apple_Terminal
+fi
+
+# Shell is non-interactive.  Be done now!
+if [[ $- != *i* ]] ; then
+  return
+fi
+
 # set LS_COLORS
 if [ -f "$HOME/.dir_colors" ]; then
   eval "$(gdircolors -b $HOME/.dir_colors)"
@@ -39,7 +52,6 @@ export XDG_CONFIG_HOME="$HOME/.config" # lazygit
 
 export NPM_PACKAGES="$HOME/.npm-global"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-export PATH="$HOME/.local/share/nvim/mason/bin:$HOME/.local/bin:/opt/homebrew/bin:$HOME/.local/ConTeXt/tex/texmf-linux-64/bin:/opt/node/bin:$NPM_PACKAGES/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
 
 export KUBE_EDITOR="nvim"
@@ -107,3 +119,5 @@ fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+export PATH="$BREW_PREFIX/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.local/bin:/opt/homebrew/bin:$HOME/.local/ConTeXt/tex/texmf-linux-64/bin:/opt/node/bin:$NPM_PACKAGES/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH"
