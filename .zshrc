@@ -75,7 +75,7 @@ alias tar='$HOMEBREW_PREFIX/bin/gtar'
 alias grep='$HOMEBREW_PREFIX/bin/ggrep --color'
 alias G="lazygit"
 
-alias vm="ssh emguy@vm.local"
+alias vm="ssh -p 2222 emguy@localhost"
 
 alias df="df -h"
 alias du="du -h"
@@ -129,3 +129,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 export PATH="$JAVA_HOME/bin:$HOMEBREW_PREFIX/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.local/bin:/opt/homebrew/bin:$HOME/.local/ConTeXt/tex/texmf-linux-64/bin:/opt/node/bin:$NPM_PACKAGES/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH"
+
+
+# enable aws auto-completion
+complete -C /opt/homebrew/bin/aws_completer aws

@@ -60,7 +60,7 @@ setup_podman_socket () {
 }
 
 new_git_branch () {
-  branch="feature/auto-$(date +"%s" | base64 | tr -d '=')"
+  branch="feature/auto-$(gdate +%T.%N | md5 | head -c8)"
   git reset --hard
   git checkout main
   git pull
