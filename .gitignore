@@ -1,5 +1,4 @@
 *
-
 !.gitignore
 !.zshrc
 !.zsh_profile
@@ -11,3 +10,4 @@
 !.config/lazygit
 !.config/lazygit/config.yml
 !.shell_utils.sh
+!.awsshell.sh
