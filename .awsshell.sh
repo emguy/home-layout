@@ -82,16 +82,21 @@ iam_gitlab_runner() {
   aws sts get-caller-indentity
 }
 
-aws_decrypt () {
-  ciphertext="$1"
+aws_encrypt () {
+  local input
+  while IFS= read -r line; do
+    input="${input}${line}\n"
+  done
+  input="${input%??}"
+  echo $input >> /dev/stdout
   proxy-on > /dev/null
-  aws kms decrypt --key-id alias/hts-data-key --region ca-central-1 --ciphertext-blob "${ciphertext}" --output text --query Plaintext | base64 -d
+  aws kms encrypt --key-id alias/hts-data-key --region ca-central-1 --plaintext "$(echo -n "${input}" | base64 -w0)" --output text --query CiphertextBlob
   proxy-off > /dev/null
 }
 
-aws_encrypt () {
-  plaintextfile="$1"
+aws_decrypt () {
+  local ciphertext="$(cat)"
   proxy-on > /dev/null
-  aws kms encrypt --key-id alias/hts-data-key --region ca-central-1 --plaintext "fileb://${plaintextfile}" --output text --query CiphertextBlob
+  aws kms decrypt --key-id alias/hts-data-key --region ca-central-1 --ciphertext-blob "${ciphertext}" --output text --query Plaintext | base64 -d
   proxy-off > /dev/null
 }
