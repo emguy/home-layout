@@ -60,6 +60,8 @@ export DOCKER_CONFIG="$HOME/.docker"
 
 export MANPAGER="/usr/bin/less -R --use-color -Ddc -Du+y"
 
+export HELM_REGISTRY_CONFIG="$HOME/.config/helm/registry/config.json"
+
 #export REGISTRY_AUTH_FILE="$HOME/.config/containers/auth.json"
 
 ## use gnu binaries
@@ -95,6 +97,7 @@ alias rg="rg --no-ignore --no-ignore-dot"
 alias nvimrc="nvim $XDG_CONFIG_HOME/nvim/init.lua"
 alias argbash="docker run -v \$(pwd):/work --rm argbash"
 alias argbash-init="docker run -v \$(pwd):/work --rm -e PROGRAM=argbash-init argbash"
+
 
 if [ -x "$(command -v kubectl)" ]; then
   # shellcheck source=/dev/null
