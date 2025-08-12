@@ -55,3 +55,8 @@
 
 [delta "interactive"]
   keep-plus-minus-markers = false
+[user]
+	email = yu.zhang@bell.ca
+	name = Yu Zhang
+[credential]
+	helper = store

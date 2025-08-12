@@ -84,11 +84,13 @@ iam_gitlab_runner() {
 
 aws_encrypt () {
   local input
-  while IFS= read -r line; do
-    input="${input}${line}\n"
+  while IFS= read -r line || [ -n "$line" ]; do
+    if [ -z "${input}" ]; then
+      input="${line}"
+    else
+      input="${input}\n${line}"
+    fi
   done
-  input="${input%??}"
-  echo $input >> /dev/stdout
   proxy-on > /dev/null
   aws kms encrypt --key-id alias/hts-data-key --region ca-central-1 --plaintext "$(echo -n "${input}" | base64 -w0)" --output text --query CiphertextBlob
   proxy-off > /dev/null
