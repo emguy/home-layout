@@ -46,8 +46,16 @@ aws-ssm() {
 }
 
 eks-refresh() {
+  env="$1"
+  cluster_name="Household-Ordering"
+  if [ "$env" = "devops" ]; then
+    cluster_name="oreo-devops"
+  elif [ -n "$env" ]; then
+    cluster_name="${cluster_name}-${env}"
+  fi
   proxy-on
-  aws eks update-kubeconfig --name Household-Ordering --region "${REGION_CODE}"
+  aws eks update-kubeconfig --name "${cluster_name}" --region "${REGION_CODE}"
+  echo "switched to ${cluster_name}" > /dev/stdout
   proxy-off
 }
 
