@@ -15,28 +15,31 @@ color_reset='\033[0m'
 
 echo_color () {
   local color="$1"; shift
-  echo -e "${color}$*${color_reset}" >&2
+  echo -en "${color}$*${color_reset}" >&2
 }
 
-ec2-list () {
+aws-ec2-list () {
   local raw_json_output
   raw_json_output="$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[{InstanceId:InstanceId},{Tags:Tags[*]}]')"
   for item in $( echo "${raw_json_output}" | jq -r '.[] | @base64'); do
-    #echo ${item} >> /dev/stdout
-    #echo ${item} | base64 --decode
-    #echo >> /dev/stdout
     instanceId="$(echo "${item}" | base64 --decode | jq -r '.[0].[0].InstanceId')"
     tags="$(echo "${item}" | base64 --decode | jq -r '.[0].[1].Tags')"
     echo_color "${color_yellow}" "${instanceId}"
     for tag in $( echo "${tags}" | jq -r '.[] | @base64'); do
       key="$(echo "${tag}" | base64 --decode | jq -r '.Key')"
       value="$(echo "${tag}" | base64 --decode | jq -r '.Value')"
-      printf "%-40s  %s\n" "${key}" "${value}" > /dev/stdout
+      if [ "${key}" = "Name" ] ; then
+        name="${value}"
+      elif [ "${key}" = "karpenter.sh/nodepool" ]; then
+        nodepool="${value}"
+      fi
     done
+    printf "    %-20s  %s" "${nodepool}" "${name}"
+    echo
   done
 }
 
-aws-ssm() {
+aws-ec2-ssh() {
   local instance_name="$1"
   if [ "$#" -lt 1 ]; then
     echo 'Posisional argument [instance-name] is required.'
